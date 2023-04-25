@@ -46,4 +46,19 @@ public class LoginController {
 
         return ResponseEntity.ok(new ResponseAPI("success", 200, result));
     }
+
+    @PostMapping("logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+        String sessionId = session.getAttribute("sessionId").toString();
+
+        loginService.logout(sessionId);
+
+        if(session != null){
+            session.invalidate();
+        }
+
+        return ResponseEntity.ok("ok");
+    }
 }

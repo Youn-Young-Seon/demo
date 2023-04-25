@@ -25,4 +25,9 @@ public class LoginService {
             return "없음";
         }
     }
+
+    public void logout(String sessionId) {
+        Member member = memberRepository.findBySessionId(sessionId);
+        member.setSessionId(null);
+    }
 }
